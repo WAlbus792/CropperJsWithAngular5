@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
-![ScreenShot](https://ibb.co/b3aVcx)
+![ScreenShot](https://image.ibb.co/hMggjc/Cropper_Js_with_Angular_5.png)
 
 ## Development server
 
