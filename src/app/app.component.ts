@@ -1,6 +1,8 @@
-import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, style } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import Cropper from 'cropperjs';
+import { debug } from 'util';
 
 @Component({
   selector: 'attachments-editor',
@@ -28,6 +30,8 @@ export class AppComponent implements OnInit {
   private scaleXValue = 1;
   private scaleYValue = 1;
 
+  private brightnessRangeValue;
+
   ngOnInit() {
     this.image = this.elPhoto.nativeElement;
     this.result = this.elResult.nativeElement;
@@ -42,14 +46,22 @@ export class AppComponent implements OnInit {
         croppable = true;
         this.cropper.crop();
         this.cropper.setCropBoxData({
-          width: 150,
-          height: 150
+          width: 350,
+          height: 350
         });
       }
     };
 
     var croppable = false;
     this.cropper = new Cropper(this.image, this.options);
+  }
+
+  adjustBrightness(value: number) {
+    //Setting the sent brightness value to the class variable, brightnessRangeValue.
+    this.brightnessRangeValue = value;
+    debugger;
+    var ImageAdjustmentsObj = new ImageAdjustments(this.result);
+    ImageAdjustmentsObj.changeBrightness(this.brightnessRangeValue);
   }
 
   makeCrop() {
@@ -158,5 +170,19 @@ export class AppComponent implements OnInit {
       }
     }
   }
+}
 
+//A class that handles the Brightness/Contrast Adjustments
+class ImageAdjustments {
+  element: HTMLElement;
+
+  constructor(element: HTMLElement) {
+    this.element = element;
+  }
+
+  changeBrightness(value: number) {
+    this.element.style.backgroundColor = value > 0 ? 'White' : 'Black';
+    this.element.style.opacity = (Math.abs(value / 100) * 2).toString()
+    return this.element;
+  }
 }

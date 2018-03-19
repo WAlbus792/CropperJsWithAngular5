@@ -108,7 +108,22 @@
     </div>
   </div>
 </div>
-
+<br />
+<input type="range" id="BrightnessRange" id="Brightness Range" #range value="50" min="0" max="100" maxlength="3" (change)="adjustBrightness(range.value)"
+  list="range_list">
+<datalist id="range_list">
+  <option>0</option>
+  <option>10</option>
+  <option>20</option>
+  <option>30</option>
+  <option>40</option>
+  <option>50</option>
+  <option>60</option>
+  <option>70</option>
+  <option>80</option>
+  <option>90</option>
+  <option>100</option>
+</datalist>
 <br/>
 <div>
   <img #result alt="" />
